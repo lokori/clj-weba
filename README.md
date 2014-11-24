@@ -1,4 +1,4 @@
-# Weba
+# Clj-Boot
 
 An attempt to implement something similar to [Spring Boot](http://projects.spring.io/spring-boot/) in Clojure.
 The idea is to provide sane defaults and a reasonable template to start a new web application project in a professional context.
