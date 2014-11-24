@@ -14,7 +14,7 @@
             [ring.util.response :as resp]
             [cheshire.generate :as json-gen]
             schema.core
-            [weba.print-wrapper :refer [log-request-wrapper]]
+            [lolog.core :refer [wrap-log-request]]
             [weba.settings :refer [settings get-settings defaultsettings configure-logging]]
             [weba.i18n :refer [wrap-locale]]
             [weba.status :refer [status hide-passwords build-id]]
@@ -59,7 +59,7 @@
       :base-url (get-in settings[:server :base-url]))
     wrap-params
     wrap-content-type
-    log-request-wrapper))
+    wrap-log-request))
 
 (defn start! [defaultsettings]
   (try

@@ -11,7 +11,7 @@ I do not think the Clojure needs heavy opinionated frameworks and this is not ai
 # What have we here
 
 * Sane logging (UTF-8, Logback based through clj-log)
-* Reasonable HTTP access log
+* Reasonable HTTP access log, [Lolog](https://github.com/lokori/lolog)
 * Embedded light-weight server (HTTP-kit)
 * Support REPL workflow (start/stop/restart hooks in user.clj)
 * Heartbeat URL (status page)
