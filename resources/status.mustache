@@ -1,0 +1,38 @@
+<!doctype html>
+<head>
+  <title>Status</title>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+    }
+    th, td {
+      padding: 5pt;
+    }
+    th {
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+<h1>Status</h1>
+<table>
+  <tr>
+    <th>Build</th>
+    <td>{{build-id}}</td>
+  </tr>
+  <tr>
+    <th>Configuration</th>
+    <td>
+      <pre>{{settings}}</pre>
+    </td>
+  </tr>
+  {{#install-history}}
+  <tr>
+    <th>Installation history</th>
+    <td>
+      <pre>{{install-history}}</pre>
+    </td>
+  </tr>
+  {{/install-history}}
+</table>
+</body>
