@@ -1,4 +1,6 @@
 (ns weba.settings
+  "Configuration handling. Defines default settings, which can be overridden in an external properties file.
+  Provides type checking and basic coercien for property values."
   (:require [clojure.java.io :refer [file]]
             clojure.set
             [clojure.tools.logging :as log]

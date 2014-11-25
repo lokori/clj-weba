@@ -17,7 +17,7 @@
          (into {})
          pisteavaimet->puu)))
 
-(c/defroutes reitit
+(c/defroutes routes
   (c/GET "/:kieli" [kieli :as req]
     (schema/validate (validoi-kieli) kieli)
     (json-response-nocache (hae-tekstit kieli))))

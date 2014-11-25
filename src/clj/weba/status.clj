@@ -1,8 +1,11 @@
 (ns weba.status
+  "Provides access to status and configuration of the software."
   (:require [clojure.java.io :as io]))
 
-;; Postwalk käsittelee yksittäisen avain-arvo-parin vektorina, ei MapEntryna.
-(defn hide-passwords [status]
+;; postwal handles a single key-value pair as a vector, not as a MapEntry
+(defn hide-passwords
+  "Passwords definitely should not be displayed in plain text. There might be other settings to mask too."
+  [status]
   (clojure.walk/postwalk #(if (and (vector? %)
                                    (= :password (first %)))
                             [:password "*****"]

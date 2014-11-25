@@ -24,10 +24,10 @@
 
 (schema.core/set-fn-validation! true)
 
-(defn ^:private reitit [settings]
+(defn ^:private routes [settings]
   (c/routes
-    (c/context "/api/i18n" [] weba.rest-api.i18n/reitit)
-    (c/context "/api/jslog" []  weba.rest-api.js-log/reitit )
+    (c/context "/api/i18n" [] weba.rest-api.i18n/routes)
+    (c/context "/api/jslog" []  weba.rest-api.js-log/routes )
     (if (:development-mode settings)
       (c/GET "/status" [] (s/render-file "status" (assoc (status)
                                                          :settings (with-out-str
@@ -40,7 +40,7 @@
 
 (defn shutdown [server]
   (log/info "Shutting down server")
-  ((:sammuta server))
+  ((:shutdown server))
   (log/info "Server shutdown ok"))
 
 (defn app 
@@ -50,7 +50,7 @@
     (fn [c json-generator]
       (.writeString json-generator (.toString c "yyyy-MM-dd"))))
   (->
-    (reitit settings)
+    (routes settings)
     wrap-keyword-params
     wrap-json-params
     (wrap-resource "public/app")
@@ -63,7 +63,7 @@
 
 (defn start! [defaultsettings]
   (try
-    (log/info "Starting server, versio" @build-id)
+    (log/info "Starting server, version" @build-id)
     (let [configuration (get-settings defaultsettings)
           _ (deliver settings configuration )
           _ (configure-logging configuration)
@@ -71,7 +71,7 @@
           shutdown (hs/run-server (app configuration)
                      {:port port})
           _ (log/info "Server started at port" port)]
-      {:sammuta shutdown})
+      {:shutdown shutdown})
     (catch Throwable t
       (let [error-msg "Server start failed"]
         (log/error t error-msg)

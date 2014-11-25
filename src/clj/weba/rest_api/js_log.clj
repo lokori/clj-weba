@@ -17,7 +17,7 @@
       (str/replace "\r" "!")
       (.substring 0 ln))))
 
-(c/defroutes reitit
+(c/defroutes routes
   (c/POST "/error" [virheenUrl userAgent message stackTrace cause]
     (log/info (str "\n"
                    "--- Javascript error ---" "\n"

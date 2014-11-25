@@ -1,5 +1,5 @@
 (ns weba.util
-  "Yleisiä apufunktioita."
+  "General util functions."
   (:require [clojure.core.typed :as t]
             [cheshire.core :as cheshire]
             [clj-time.core :as time]
@@ -89,7 +89,7 @@
     (reduce max-date (max-date a b) more)))
 
 (defn paths
-  "palauttaa joukon jossa on kaikki polut mapin sisään. Ts. rekursiivinen mapin rakenteen kuvaus"
+  "Returns a set containing all paths pointing inside the map. Ie. a recursive description of the map's structure."
   ([m]
     (set (paths m [])))
   ([m ks]
@@ -105,7 +105,7 @@
   (time-format/parse-local-date (time-format/formatters :year-month-day) ymd))
 
 (defn diff-maps
-  "Palauttaa kahden mapin erot muodossa {avain [uusi-arvo vanha-arvo]} tai nil jos muutoksia ei ole"
+  "Returns differences between the maps in the form {key [new-value old-value]} or nil if the maps are identical."
   [new-map old-map]
   (into {} (for [k (union (set (keys new-map))
                           (set (keys old-map)))
@@ -122,8 +122,8 @@
     keywordize-keys))
 
 (defn uusin-muokkausaika
-  "Palauttaa uusimman muokkausajan annetuista arvoista.
-   Polut ovat get-in-tyylisiä avainpolkuja, jotka kertovat mistä muokkausajat haetaan."
+  "Returns the last modified time stamp from the given values.
+   Polut are get-in style key-paths which define the route to the location of the last modified time stamp."
   [arvot & polut]
   (let [muokkausajat (flatten
                        (for [arvo arvot
@@ -162,10 +162,10 @@
       (catch Throwable t
         (if (instance? expected-throwable t)
           (let [attempts-left (dec attempts)]
-            (log/warn t "Operaatio epäonnistui, yritetään uudelleen vielä"
+            (log/warn t "Operation failed, retrying.."
                       (if (= attempts-left 1)
-                        "kerran"
-                        (str attempts-left " kertaa")))
+                        "last time"
+                        (str attempts-left " times")))
             (retrying* expected-throwable attempts-left f))
           (throw t))))))
 
