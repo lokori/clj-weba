@@ -65,6 +65,26 @@ A sample session's output might look like this
 ```
 
 
+# Unit testing a web application
+
+Unit testing a web application is quite possible. A sample is included and the test run looks like this:
+
+```
+lein test
+
+lein test rest.statuspage-test
+2014-11-25 10:55:29.461 INFO  lolog.core: Request 2 start.  remote-addr: localhost ,method: GET ,uri: /fi/status ,query-string:  ,user-agent:  ,referer: 
+2014-11-25 10:55:29.544 INFO  lolog.core: Request 2 end. Duration: 280 ms. uri: /fi/status
+
+Ran 1 tests containing 1 assertions.
+0 failures, 0 errors.
+```
+
+The interesting point is that the test is almost purely functional. The logging is a side-effect, but it would be a bit difficult to trace possible errors without it in CI builds.
+To make unit testing possible, the application logic (Ring wrapper stack) is separated from the web server. The test uses the Ring stack but doesn't start up web server. 
+
+This has two obvious benefits: the tests run faster and they can be executed simultaneously.
+
 # Credits
 
 While much of the code has been written by me, much of it has been borrowed. I can't recall everything but the code is heavily based on 
