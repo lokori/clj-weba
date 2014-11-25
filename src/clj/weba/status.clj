@@ -2,7 +2,7 @@
   "Provides access to status and configuration of the software."
   (:require [clojure.java.io :as io]))
 
-;; postwal handles a single key-value pair as a vector, not as a MapEntry
+;; postwalk handles a single key-value pair as a vector, not as a MapEntry
 (defn hide-passwords
   "Passwords definitely should not be displayed in plain text. There might be other settings to mask too."
   [status]

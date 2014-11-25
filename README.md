@@ -5,6 +5,8 @@ The idea is to provide sane defaults and a reasonable template to start a new we
 
 Since there is already a project named Clojure Boot this experiment is clj-weba. Supposedly this doesn't mean anything.
 
+The code was presented in the awesome [ClojuTre 2014](http://clojutre.org) event.
+
 
 ## Professional .. enterprise
 
