@@ -26,7 +26,7 @@ I do not think the Clojure needs heavy opinionated frameworks and this is not ai
 * JSON serialization support
 * Retry macro
 * Sane exception handling
-* Client-side Javascript error logger
+* Client-side Javascript error logger (Why? [Thoughtworks explains](http://www.thoughtworks.com/radar/techniques/capturing-client-side-javascript-errors)
 
 
 # What was intentionally dropped
@@ -43,7 +43,7 @@ Obviously certain libraries have been selected such as Compojure. Beoynd the obv
 
 * The software provides route to the status page. In development mode the status page contains settings. In production mode it's just OK for ping and monitoring.
 * build-id.txt file is used to determine the build version if it exists. Generate during the CI build to automagically access the version.
-* install-history.txt is used to show installation history. Generate during automated deployment to automagically access the installation history.
+* install-history.txt is used to show installation history. Generate in your [deployment pipeline](dev.solita.fi/2014/10/01/simple-deployment-pipeline.html) to automagically access the installation history.
 * Localization support is for fi/sv at the moment. Change this if you need it, it's just an example.
 * Logback configuration automatically loads from logback.xml. 
 

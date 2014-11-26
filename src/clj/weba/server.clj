@@ -15,7 +15,7 @@
             [cheshire.generate :as json-gen]
             schema.core
             [lolog.core :refer [wrap-log-request]]
-            [weba.settings :refer [settings get-settings defaultsettings configure-logging]]
+            [weba.settings :refer [settings read-configuration defaultsettings configure-logging]]
             [weba.i18n :refer [wrap-locale]]
             [weba.status :refer [status hide-passwords build-id]]
             [stencil.core :as s]
@@ -64,7 +64,7 @@
 (defn start! [defaultsettings]
   (try
     (log/info "Starting server, version" @build-id)
-    (let [configuration (get-settings defaultsettings)
+    (let [configuration (read-configuration defaultsettings)
           _ (deliver settings configuration )
           _ (configure-logging configuration)
           port (get-in configuration [:server :port])
