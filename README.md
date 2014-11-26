@@ -90,6 +90,20 @@ To make unit testing possible, the application logic (Ring wrapper stack) is sep
 
 This has two obvious benefits: the tests run faster and they can be executed simultaneously.
 
+# Heartbeat URL (status page)
+
+There are three "levels" in my opinion:
+1. simply provide a ping URL which returns "OK" if everything is fine
+2. provide easy access to see the settings
+3. provide access to system information
+
+Options 1 and 2 are here. I have done option 3 but modern monitoring systems seem to make it obsolete.
+
+Here's what the option 2 might look like:
+
+![Status page](https://raw.github.com/lokori/clj-weba/master/img/statuspage.png)
+
+
 # Credits
 
 While much of the code has been written by me, much of it has been borrowed. I can't recall everything but the code is heavily based on 
