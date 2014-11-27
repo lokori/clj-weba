@@ -6,18 +6,18 @@
             [weba.rest-api.http-util :refer [json-response-nocache]]
             [weba.util :refer [pisteavaimet->puu]]))
 
-(defn validoi-kieli []
+(defn validate-lang []
   (schema/pred (fn[k] (or (= k "fi")(= k "sv")))))
 
-(defn hae-tekstit [kieli]
+(defn fetch-texts [lang]
   (ResourceBundle/clearCache)
-  (let [bundle (ResourceBundle/getBundle "i18n/tekstit" (Locale. kieli))]
+  (let [bundle (ResourceBundle/getBundle "i18n/labels" (Locale. lang))]
     (->> (for [key (.keySet bundle)]
            [(keyword key) (.getString bundle key)])
          (into {})
          pisteavaimet->puu)))
 
 (c/defroutes routes
-  (c/GET "/:kieli" [kieli :as req]
-    (schema/validate (validoi-kieli) kieli)
-    (json-response-nocache (hae-tekstit kieli))))
+  (c/GET "/:lang" [lang :as req]
+    (schema/validate (validate-lang) lang )
+    (json-response-nocache (fetch-texts lang))))

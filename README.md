@@ -44,7 +44,7 @@ Obviously certain libraries have been selected such as Compojure. Beoynd the obv
 * The software provides route to the status page. In development mode the status page contains settings. In production mode it's just OK for ping and monitoring.
 * build-id.txt file is used to determine the build version if it exists. Generate during the CI build to automagically access the version.
 * install-history.txt is used to show installation history. Generate in your [deployment pipeline](dev.solita.fi/2014/10/01/simple-deployment-pipeline.html) to automagically access the installation history.
-* Localization support is for fi/sv at the moment. Change this if you need it, it's just an example.
+* Localization support is for fi/sv at the moment and JS-based. Change this if you need it, it's just an example.
 * Logback configuration automatically loads from logback.xml. 
 
 
@@ -89,6 +89,19 @@ The interesting point is that the test is almost purely functional. The logging 
 To make unit testing possible, the application logic (Ring wrapper stack) is separated from the web server. The test uses the Ring stack but doesn't start up web server. 
 
 This has two obvious benefits: the tests run faster and they can be executed simultaneously.
+
+# Localization
+
+Go to [http://localhost:8081/api/i18n/fi](http://localhost:8081/api/i18n/fi) and the software returns a JSON containing the localization
+keys and values. The idea is to use these keys in your UI. This assumes your UI is Javascript-based rather than HTML rendered in the backend,
+but I suppose this is a valid assumption these days.
+
+You should get something like this back from the URL:
+```
+{"ultimate":{"pwner":"Conan the Cimmerian"}}
+```
+
+
 
 # Heartbeat URL (status page)
 
