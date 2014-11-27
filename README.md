@@ -27,6 +27,7 @@ I do not think the Clojure needs heavy opinionated frameworks and this is not ai
 * Retry macro
 * Sane exception handling
 * Client-side Javascript error logger (Why? [Thoughtworks explains](http://www.thoughtworks.com/radar/techniques/capturing-client-side-javascript-errors)
+* Interesting source/properties tests (see below)
 
 
 # What was intentionally dropped
@@ -115,6 +116,21 @@ Options 1 and 2 are here. I have done option 3 but modern monitoring systems see
 Here's what the option 2 might look like:
 
 ![Status page](https://raw.github.com/lokori/clj-weba/master/img/statuspage.png)
+
+
+
+# Source code tests
+
+There are things which are relatively easy to check automatically and a source test is provided which checks the following:
+
+* Javascript source for console.log/debug calls which require developer tools to work. Not a good idea in production.
+* localization properties files have matching keys
+* pre/post conditions are defined properly. Clojure compiler doesn't warn if they are incorrectly defined.
+
+Using the same pattern it's possible to check more interesting things from Clojure source code using the 
+[Reader](http://clojure.org/reader) and building on the [homoiconocity](http://en.wikipedia.org/wiki/Homoiconicity) of the language. 
+To my understanding, despite being very awesome, Haskel and all that Hindley-Milner stuff will not do this :) 
+
 
 
 # Credits

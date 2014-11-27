@@ -25,6 +25,7 @@
              :uberjar {:main weba.server
                        :aot :all}}
   :source-paths ["src/clj"]
+  :java-source-paths ["src/java"]  
   :test-paths ["test/clj"]
   :test-selectors {:kaikki (constantly true)
                    :default  (complement (some-fn :integraatio :performance)) 
