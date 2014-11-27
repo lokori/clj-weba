@@ -121,27 +121,18 @@
     cheshire/parse-string
     keywordize-keys))
 
-(defn uusin-muokkausaika
+(defn newest-lastmodified
   "Returns the last modified time stamp from the given values.
    Polut are get-in style key-paths which define the route to the location of the last modified time stamp."
-  [arvot & polut]
-  (let [muokkausajat (flatten
-                       (for [arvo arvot
-                             polku polut]
-                         (get-in-list arvo polku)))]
-    (reduce max-date (time/date-time 1970 1 1 0 0 1) muokkausajat))))
+  [values & paths]
+  (let [lastmodifieds (flatten
+                        (for [value values
+                              path paths]
+                          (get-in-list value path)))]
+    (reduce max-date (time/date-time 1970 1 1 0 0 1) lastmodifieds))))
 
 (t/ann ^:no-check clojure.string/lower-case [String -> String])
-(t/ann sisaltaako-kentat? (t/All [k]
-                            [(t/Map k t/Any) (t/Coll k) String -> Boolean]))
-(defn sisaltaako-kentat?
-  "Predikaatti joka palauttaa true, jos annettujen kenttien sisältö sisältää annetun termin. Kirjainkoolla ei ole väliä.
-   Kenttien sisältö konkatenoidaan yhteen välilyönnillä erotettuna."
-  [entity kentat termi]
-  (let [termi (string/lower-case termi)
-        kenttien-sisallot (t/for [kentta :- k kentat] (entity kentta))
-        sisalto (string/lower-case (string/join " " kenttien-sisallot))]
-    (.contains sisalto termi)))
+
 
 (t/tc-ignore
 
