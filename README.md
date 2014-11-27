@@ -136,9 +136,16 @@ To my understanding, despite being very awesome, Haskel and all that Hindley-Mil
 # Credits
 
 While much of the code has been written by me, much of it has been borrowed. I can't recall everything but the code is heavily based on 
-[Aituhaku](https://github.com/Opetushallitus/aituhaku) project written for [Finnish National Board of Education](http://www.oph.fi). The code
+[Aituhaku](https://github.com/Opetushallitus/aituhaku) and [Aitu](https://github.com/Opetushallitus/aitu) projects written for [Finnish National Board of Education](http://www.oph.fi). The code
 for that project was written partly in Finnish because that's how we agreed on the project. I translated the code to english and modified
 it to suit the purpose of serving as a more general example.
+
+# Short note about tests
+
+The code is without unit tests. The tests actually exist, but I have translated and modified the code and didn't bother to
+translate the tests to match this modified version. If this project evolves towards something more mature it will come with
+proper test suite.
+ 
 
 ## Why?
 
