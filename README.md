@@ -28,6 +28,7 @@ I do not think the Clojure needs heavy opinionated frameworks and this is not ai
 * Sane exception handling
 * Client-side Javascript error logger (Why? [Thoughtworks explains](http://www.thoughtworks.com/radar/techniques/capturing-client-side-javascript-errors)
 * Interesting source/properties tests (see below)
+* Performance test, using [clj-gatling](https://github.com/mhjort/clj-gatling/)
 
 
 # What was intentionally dropped
@@ -90,6 +91,22 @@ The interesting point is that the test is almost purely functional. The logging 
 To make unit testing possible, the application logic (Ring wrapper stack) is separated from the web server. The test uses the Ring stack but doesn't start up web server. 
 
 This has two obvious benefits: the tests run faster and they can be executed simultaneously.
+
+# Performance test
+
+First, start the application in REPL or from the uberjar. 
+
+Performance test runs with this command
+
+```
+lein test :performance 
+```
+
+The test is very simple and straightforward. The perf tests are excluded from the normal lein test
+runs using test-selector in project.clj. Test selectors are nice. 
+
+Look into [clj-gatling](https://github.com/mhjort/clj-gatling/) for more information about the perf test library.
+
 
 # Localization
 
