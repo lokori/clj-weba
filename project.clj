@@ -15,14 +15,15 @@
                  [prismatic/schema "0.2.0"]
                  [stencil "0.3.2"]
                  [peridot "0.3.0"]
-                 [clj-gatling "0.4.0"]	  
+
                  [org.clojure/core.typed "0.2.61"]
                  [org.clojars.lokori/lolog "0.1.0"]]
   :plugins [[test2junit "1.0.1"]
             [lein-typed "0.3.5"]]
   :profiles {:dev {:source-paths ["dev"]
                    :dependencies [[org.clojure/tools.namespace "0.2.4"]
-                                  [org.clojure/test.check "0.5.8"]]}
+                                  [org.clojure/test.check "0.5.8"]
+				  [clj-gatling "0.4.0"]]}
              :uberjar {:main weba.server
                        :aot :all}}
   :source-paths ["src/clj"]
