@@ -64,6 +64,8 @@
                   (vector? (nth form 3))
                   (= pp (nth form 4)))))))
 
+; This is perhaps coming to future versions of Clojure built-in. Will likely be obsolete when 
+; this feature is incorporated in standard Clojure: http://dev.clojure.org/jira/browse/CLJ-1473
 (defn pre-post-not-vector? [form]
   (when-let [pp (pre-post form)]
     (not (every? vector? (vals pp)))))
