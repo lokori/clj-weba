@@ -10,7 +10,7 @@
 (defn sanitize
   "replaces linefeeds with blanks and limits the length"
   [s]
-  {:pre [clojure.core/string?]}
+  {:pre [(clojure.core/string? s)]}
   (let [ln (min (.length s) maxlength)]
     (-> s
       (str/replace "\n" "!")

@@ -71,21 +71,21 @@
     (not (every? vector? (vals pp)))))
 
 (deftest js-debug-test
-  "console.log doesn't work without developer tools in all browsers. Therefore it's a bad thing to have in Javascript source files."
-  (is (empty? (matching-lines "resources/public/js"
-                               #".*\.js"
-                               [#"console\.log"
-                                #"debugger"
-                                (re-pattern (str \u00a0)) ; non-breaking space
-                                ]
-                               :skip ["resources/public/js/vendor/angular.js"
-                                       "resources/public/js/vendor/stacktrace.js"]))))
+  (testing "console.log doesn't work without developer tools in all browsers. Therefore it's a bad thing to have in Javascript source files."
+    (is (empty? (matching-lines "resources/public/js"
+                                 #".*\.js"
+                                 [#"console\.log"
+                                  #"debugger"
+                                  (re-pattern (str \u00a0)) ; non-breaking space
+                                  ]
+                                 :skip ["resources/public/js/vendor/angular.js"
+                                         "resources/public/js/vendor/stacktrace.js"])))))
  
 (deftest properties-encoding-test
-  "searches for characters which are not printable characters in the properties files." 
-  (is (empty? (matching-lines "resources/i18n"
-                               #".*\.properties"
-                               [#"[^\p{Print}\p{Space}]+"]))))
+  (testing "searches for characters which are not printable characters in the properties files." 
+    (is (empty? (matching-lines "resources/i18n"
+                                 #".*\.properties"
+                                 [#"[^\p{Print}\p{Space}]+"])))))
 
 (defn properties-duplicat-keys? [r]
   (let [dup (doto (util.DuplicateAwareProperties.)
@@ -95,17 +95,17 @@
     duplicates))
 
 (deftest properties-duplicate-keys-test
-  "Searches properties files for duplicate keys"
-  (is (empty? (matching-files "resources/i18n" #".*\.properties"
-                properties-duplicat-keys?))))
+  (testing "Searches properties files for duplicate keys"
+    (is (empty? (matching-files "resources/i18n" #".*\.properties"
+                  properties-duplicat-keys?)))))
 
 (deftest pre-post-in-correct-place
-  "Pre/post condition should be in the correct position. If not, compiler will not usually complain but code doesn't work."
-  (is (empty? (matching-forms "src/clj" pre-post-in-wrong-place?))))
+  (testing "Pre/post condition should be in the correct position. If not, compiler will not usually complain but code doesn't work."
+    (is (empty? (matching-forms "src/clj" pre-post-in-wrong-place?)))))
 
 (deftest pre-post-vector-test
-  "Pre/post condition should be a vector. Compiler doesn't warn if it's something else, but it will not work as intended."
-  (is (empty? (matching-forms "src/clj" pre-post-not-vector?))))
+  (testing "Pre/post condition should be a vector. Compiler doesn't warn if it's something else, but it will not work as intended."
+    (is (empty? (matching-forms "src/clj" pre-post-not-vector?)))))
 
 (defn load-props [filename]
   (with-open [fs (java.io.FileInputStream. filename)]
