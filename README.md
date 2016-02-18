@@ -1,5 +1,8 @@
 # clj-weba ? 
 
+[![Build Status](https://travis-ci.org/lokori/clj-weba.svg?branch=master)](https://travis-ci.org/lokori/clj-weba)
+
+
 An attempt to implement something similar to [Spring Boot](http://projects.spring.io/spring-boot/) in Clojure.
 The idea is to provide sane defaults and a reasonable template to start a new web application project in a professional context.
 
